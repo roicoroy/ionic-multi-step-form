@@ -5,7 +5,6 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-
   <div>
 
     <div class="flex justify-content-space-between ion-margin-top relative">
@@ -35,7 +34,7 @@
 
           <div class="full-width ion-text-start">
 
-            <form [formGroup]="billingForm" #billingFormRef="ngForm" novalidate *ngIf="slide === 'Waites List'">
+            <form [formGroup]="waitersListForm" #waitersFormRef="ngForm" novalidate *ngIf="slide === 'Waites List'">
 
               <ion-list-header class="ion-no-padding" style="min-height: auto;">
                 <ion-label class="ion-text-center" color="primary">
@@ -46,12 +45,12 @@
               <ion-row>
                 <ion-col>
                   <ion-item lines="none">
-                    <ion-label position="stacked">First name</ion-label>
-                    <ion-input type="text" formControlName="first_name"></ion-input>
+                    <ion-label position="stacked">Name</ion-label>
+                    <ion-input type="text" formControlName="name"></ion-input>
                   </ion-item>
                   <ion-text color="danger">
                     <span class="text-tiny"
-                      [style.visibility]="billingFirstName?.errors?.required && billingFormRef.submitted ? '' : 'hidden'">
+                      [style.visibility]="nameControl?.errors?.required && waitersFormRef.submitted ? '' : 'hidden'">
                       Field required
                     </span>
                   </ion-text>
@@ -59,12 +58,12 @@
 
                 <ion-col>
                   <ion-item lines="none">
-                    <ion-label position="stacked">Last name</ion-label>
-                    <ion-input type="text" formControlName="last_name"></ion-input>
+                    <ion-label position="stacked">Points</ion-label>
+                    <ion-input type="text" formControlName="points"></ion-input>
                   </ion-item>
                   <ion-text color="danger">
                     <span class="text-tiny"
-                      [style.visibility]="billingLastName?.errors?.required && billingFormRef.submitted ? '' : 'hidden'">
+                      [style.visibility]="pointsControl?.errors?.required && waitersFormRef.submitted ? '' : 'hidden'">
                       Field required
                     </span>
                   </ion-text>
@@ -74,19 +73,19 @@
               <ion-row>
                 <ion-col>
                   <ion-item lines="none">
-                    <ion-label position="stacked">Email</ion-label>
-                    <ion-input type="email" formControlName="email"></ion-input>
+                    <ion-label position="stacked">Hours</ion-label>
+                    <ion-input type="email" formControlName="hours"></ion-input>
                   </ion-item>
                   <ion-text color="danger">
                     <span class="text-tiny"
-                      [style.visibility]="billingEmail?.errors?.required && billingFormRef.submitted ? '' : 'hidden'">
+                      [style.visibility]="hoursControl?.errors?.required && waitersFormRef.submitted ? '' : 'hidden'">
                       Field required
                     </span>
                   </ion-text>
                 </ion-col>
               </ion-row>
 
-              <ion-row>
+              <!-- <ion-row>
                 <ion-col>
                   <ion-item lines="none">
                     <ion-label position="stacked">Address</ion-label>
@@ -94,7 +93,7 @@
                   </ion-item>
                   <ion-text color="danger">
                     <span class="text-tiny"
-                      [style.visibility]="billingAddress?.errors?.required && billingFormRef.submitted ? '' : 'hidden'">
+                      [style.visibility]="billingAddress?.errors?.required && waitersFormRef.submitted ? '' : 'hidden'">
                       Field required
                     </span>
                   </ion-text>
@@ -109,7 +108,7 @@
                   </ion-item>
                   <ion-text color="danger">
                     <span class="text-tiny"
-                      [style.visibility]="billingCity?.errors?.required && billingFormRef.submitted ? '' : 'hidden'">
+                      [style.visibility]="billingCity?.errors?.required && waitersFormRef.submitted ? '' : 'hidden'">
                       Field required
                     </span>
                   </ion-text>
@@ -122,7 +121,7 @@
                   </ion-item>
                   <ion-text color="danger">
                     <span class="text-tiny"
-                      [style.visibility]="billingState?.errors?.required && billingFormRef.submitted ? '' : 'hidden'">
+                      [style.visibility]="billingState?.errors?.required && waitersFormRef.submitted ? '' : 'hidden'">
                       Field required
                     </span>
                   </ion-text>
@@ -137,7 +136,7 @@
                   </ion-item>
                   <ion-text color="danger">
                     <span class="text-tiny"
-                      [style.visibility]="billingZip?.errors?.required && billingFormRef.submitted ? '' : 'hidden'">
+                      [style.visibility]="billingZip?.errors?.required && waitersFormRef.submitted ? '' : 'hidden'">
                       Field required
                     </span>
                   </ion-text>
@@ -150,39 +149,39 @@
                   </ion-item>
                   <ion-text color="danger">
                     <span class="text-tiny"
-                      [style.visibility]="billingCountryCode?.errors?.required && billingFormRef.submitted ? '' : 'hidden'">
+                      [style.visibility]="billingCountryCode?.errors?.required && waitersFormRef.submitted ? '' : 'hidden'">
                       Field required
                     </span>
                   </ion-text>
                 </ion-col>
-              </ion-row>
+              </ion-row> -->
 
             </form>
 
-            <form [formGroup]="shippingForm" #shippingFormRef="ngForm" novalidate *ngIf="slide === 'Date'">
+            <form [formGroup]="dateForm" #dateFormRef="ngForm" novalidate *ngIf="slide === 'Date'">
 
               <ion-list-header class="ion-no-padding" style="min-height: auto;">
                 <ion-label class="ion-text-center" color="primary">
-                  Shipping details
+                  Date
                 </ion-label>
               </ion-list-header>
 
               <ion-row>
                 <ion-col>
                   <ion-item lines="none">
-                    <ion-label position="stacked">Delivery address</ion-label>
-                    <ion-input type="text" formControlName="address"></ion-input>
+                    <ion-label position="stacked">Date</ion-label>
+                    <ion-input type="text" formControlName="date"></ion-input>
                   </ion-item>
                   <ion-text color="danger">
                     <span class="text-tiny"
-                      [style.visibility]="shippingAddress?.errors?.required && shippingFormRef.submitted ? '' : 'hidden'">
+                      [style.visibility]="dateControl?.errors?.required && dateFormRef.submitted ? '' : 'hidden'">
                       Field required
                     </span>
                   </ion-text>
                 </ion-col>
               </ion-row>
 
-              <ion-row>
+              <!-- <ion-row>
                 <ion-col>
                   <ion-item lines="none">
                     <ion-label position="stacked">Delivery contact number</ion-label>
@@ -223,9 +222,9 @@
                     <ion-input type="text" formControlName="message"></ion-input>
                   </ion-item>
                 </ion-col>
-              </ion-row>
+              </ion-row> -->
 
-              <div class="flex align-items-center full-width ion-margin-top">
+              <!-- <div class="flex align-items-center full-width ion-margin-top">
                 <div class="ion-margin-end">
                   <h5 class="text-medium bold">Upload image</h5>
                   <ion-button strong shape="round" color="primary" size="small" (click)="presentActionSheet()">
@@ -235,12 +234,12 @@
                 <div>
                   <img class="img-thumb" [src]="imagePath" *ngIf="imagePath">
                 </div>
-              </div>
+              </div> -->
 
             </form>
 
             <!-- <form [formGroup]="paymentForm" #paymentFormRef="ngForm" novalidate *ngIf="slide === 'Tips'"> -->
-            <form [formGroup]="tipsForm" #paymentFormRef="ngForm" novalidate *ngIf="slide === 'Tips'">
+            <form [formGroup]="tipsForm" #tipsFormRef="ngForm" novalidate *ngIf="slide === 'Tips'">
 
 
               <ion-list-header class="ion-no-padding" style="min-height: auto;">
@@ -263,7 +262,7 @@
                   </ion-item>
                   <ion-text color="danger">
                     <span class="text-tiny"
-                      [style.visibility]="paymentNumber?.errors?.required && paymentFormRef.submitted ? '' : 'hidden'">
+                      [style.visibility]="paymentNumber?.errors?.required && tipsFormRef.submitted ? '' : 'hidden'">
                       Field required
                     </span>
                   </ion-text>
@@ -278,7 +277,7 @@
                   </ion-item>
                   <ion-text color="danger">
                     <span class="text-tiny"
-                      [style.visibility]="paymentExpiration?.errors?.required && paymentFormRef.submitted ? '' : 'hidden'">
+                      [style.visibility]="paymentExpiration?.errors?.required && tipsFormRef.submitted ? '' : 'hidden'">
                       Field required
                     </span>
                   </ion-text>
@@ -291,7 +290,7 @@
                   </ion-item>
                   <ion-text color="danger">
                     <span class="text-tiny"
-                      [style.visibility]="paymentCvv?.errors?.required && paymentFormRef.submitted ? '' : 'hidden'">
+                      [style.visibility]="paymentCvv?.errors?.required && tipsFormRef.submitted ? '' : 'hidden'">
                       Field required
                     </span>
                   </ion-text>
@@ -318,87 +317,81 @@
             <div *ngIf="slide === 'Summary'">
               <ion-list-header class="ion-no-padding" style="min-height: auto;">
                 <ion-label class="ion-text-center" color="primary">
-                  Order details
+                  Team Entry Details Summary
                 </ion-label>
               </ion-list-header>
 
-              <div *ngIf="shippingForm.valid">
-                <p class="text-medium bold ion-text-uppercase">
-                  Shipping details
-                </p>
-                <div class="divider"></div>
-
-                <div *ngFor="let control of shippingForm.controls | keyvalue: originalOrder">
+              <div *ngIf="dateForm.valid">
+                <div *ngFor="let control of dateForm.controls | keyvalue: originalOrder">
                   <p class="text-medium margin-v-sm">
                     <span class="bold">
                       {{ control.key.replace('_', ' ') | titlecase }}:
                     </span>
-                    {{ control.value.value || '--' }}
+                    {{ control.value.value }}
                   </p>
                 </div>
-                <p class="text-medium margin-v-sm" *ngIf="imagePath">
+                <!-- <p class="text-medium margin-v-sm" *ngIf="imagePath">
                   <span class="bold">
                     Attachment:
                   </span>
                   <img class="img-thumb" [src]="imagePath">
-                </p>
+                </p> -->
+              </div>
+              
+              <div *ngIf="tipsForm.valid">
+                <div *ngFor="let control of tipsForm.controls | keyvalue: originalOrder">
+                  <p class="text-medium margin-v-sm">
+                    <span class="bold">
+                      {{ control.key.replace('_', ' ') | titlecase }}:
+                    </span>
+                    {{ control.value.value | json }}
+                  </p>
+                </div>
+                <!-- <p class="text-medium margin-v-sm" *ngIf="imagePath">
+                  <span class="bold">
+                    Attachment:
+                  </span>
+                  <img class="img-thumb" [src]="imagePath">
+                </p> -->
               </div>
 
-              <div *ngIf="billingForm.valid">
+              <div *ngIf="waitersListForm.valid">
                 <div class="divider"></div>
                 <p class="text-medium bold ion-text-uppercase">
-                  Billing details
+                  Waiters List
                 </p>
                 <div class="divider"></div>
-                <p class="text-medium margin-v-sm"
-                  *ngFor="let control of billingForm.controls | keyvalue: originalOrder">
-                  <span class="bold">
-                    {{ control.key.replace('_', ' ') | titlecase }}:
-                  </span>
-                  {{ control.value.value || '--' }}
-                </p>
+                <!-- <span class="text-small bold ion-text-uppercase">
+                  Waiter
+                </span> -->
+                <div *ngFor='let item of [1,2,3]'>
+                  <p class="text-medium margin-v-sm"
+                    *ngFor="let control of waitersListForm.controls | keyvalue: originalOrder">
+
+                    <span class="bold">
+                      {{ control.key.replace('_', ' ') | titlecase }}:
+                      <!--  -->
+                    </span>
+                    {{ control. value.value || '--' }}
+                  </p>
+                  <p>tipsShare: {{ '£25.36' }}</p>
+                  <div class="divider"></div>
+                  <!-- 
+                  <p class="text-small bold ion-text-uppercase">
+                    Points
+                  </p>
+                  <ion-list>
+                    <ion-item *ngFor="let item of points?.points">
+                      <ion-label>
+                        <h2 class="text-medium bold">{{ item.name }}</h2>
+                      </ion-label>
+                      <div>
+                        <span class="text-medium">{{ item.amount | currency}}</span>
+                      </div>
+                    </ion-item>
+                  </ion-list> -->
+                </div>
               </div>
-
-              <div class="divider"></div>
-              <p class="text-medium bold ion-text-uppercase">
-                Items
-              </p>
-              <div class="divider"></div>
-
-              <ion-list>
-                <ion-item *ngFor="let item of order?.items">
-                  <ion-label>
-                    <h2 class="text-medium bold">{{ item.name }}</h2>
-                  </ion-label>
-                  <div>
-                    <span class="text-medium">{{ item.amount | currency}}</span>
-                  </div>
-                </ion-item>
-                <ion-item>
-                  <ion-label>
-                    <h2 class="text-medium bold">Subtotal</h2>
-                  </ion-label>
-                  <div>
-                    <span class="text-medium">{{ order?.subtotal | currency}}</span>
-                  </div>
-                </ion-item>
-                <ion-item>
-                  <ion-label>
-                    <h2 class="text-medium bold">Shipping & Handling</h2>
-                  </ion-label>
-                  <div>
-                    <span class="text-medium">{{ order?.shippingFee | currency}}</span>
-                  </div>
-                </ion-item>
-                <ion-item>
-                  <ion-label>
-                    <h2 class="text-medium bold">Total</h2>
-                  </ion-label>
-                  <div>
-                    <span class="text-medium bold">{{ order?.total | currency}}</span>
-                  </div>
-                </ion-item>
-              </ion-list>
 
               <div class="ion-text-center">
                 <ion-button type="button" style="width: 200px;" class="ion-margin-vertical" strong size="large"
@@ -419,11 +412,11 @@
         </ion-slide>
       </ng-container>
     </ion-slides>
-  </div>
 
+  </div>
 </ion-content>
 
-<ion-footer>
+<ion-footer *ngIf="!isEnd">
   <ion-toolbar>
     <div class="full-width flex align-items-center justify-content-space-between">
       <ion-button style="width: 120px;" strong shape="round" color="dark"

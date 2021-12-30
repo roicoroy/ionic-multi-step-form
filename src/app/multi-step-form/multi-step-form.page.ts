@@ -18,35 +18,34 @@ export class MultiStepFormPage implements OnInit {
 
   @ViewChild(IonContent, { static: true }) ionContent: IonContent;
   @ViewChild(IonSlides, { static: false }) ionSlides: IonSlides;
-  @ViewChild('billingFormRef', { static: false }) billingFormRef: NgForm;
-  @ViewChild('shippingFormRef', { static: false }) shippingFormRef: NgForm;
-  @ViewChild('paymentFormRef', { static: false }) paymentFormRef: NgForm;
+  @ViewChild('waitersFormRef', { static: false }) waitersFormRef: NgForm;
+  @ViewChild('dateFormRef', { static: false }) dateFormRef: NgForm;
+  @ViewChild('tipsFormRef', { static: false }) tipsFormRef: NgForm;
 
-  public order: any = {
-    id: 1,
-    items: [{
-      id: 1,
-      name: 'Denim T-Shirt',
-      amount: 15.00,
-    }, {
-      id: 1,
-      name: 'Denim Pants',
-      amount: 5.00,
-    }, {
-      id: 1,
-      name: 'Black T-Shirt',
-      amount: 5.00,
-    }],
-    subtotal: 25.00,
-    shippingFee: 5.00,
-    total: 30.00,
+  public points: any = {
+    // id: 1,
+    points: [
+      {
+        id: 1,
+        name: 'Serve Wine',
+        amount: 0.5,
+      },
+      {
+        id: 2,
+        name: 'Answer Phone',
+        amount: 0.5,
+      },
+    ],
+    // subtotal: 25.00,
+    // shippingFee: 5.00,
+    // total: 30.00,
   };
 
-  public billingForm: FormGroup;
+  public waitersListForm: FormGroup;
   public tipsForm: FormGroup;
-  public shippingForm: FormGroup;
+  public dateForm: FormGroup;
 
-  public imagePath: SafeResourceUrl;
+  // public imagePath: SafeResourceUrl;
 
   public times = [];
 
@@ -61,65 +60,70 @@ export class MultiStepFormPage implements OnInit {
   public isBeginning: boolean = true;
   public isEnd: boolean = false;
 
-  get billingFirstName(): AbstractControl {
-    return this.billingForm.get('first_name');
+  get nameControl(): AbstractControl {
+    return this.waitersListForm.get('name');
   }
 
-  get billingLastName(): AbstractControl {
-    return this.billingForm.get('last_name');
+  get pointsControl(): AbstractControl {
+    return this.waitersListForm.get('points');
   }
 
-  get billingEmail(): AbstractControl {
-    return this.billingForm.get('email');
+  get hoursControl(): AbstractControl {
+    return this.waitersListForm.get('hours');
   }
 
-  get billingAddress(): AbstractControl {
-    return this.billingForm.get('address');
+  // get billingAddress(): AbstractControl {
+  //   return this.waitersListForm.get('address');
+  // }
+
+  // get billingCity(): AbstractControl {
+  //   return this.waitersListForm.get('city');
+  // }
+
+  // get billingState(): AbstractControl {
+  //   return this.waitersListForm.get('state');
+  // }
+
+  // get billingZip(): AbstractControl {
+  //   return this.waitersListForm.get('zip');
+  // }
+
+  // get billingCountryCode(): AbstractControl {
+  //   return this.waitersListForm.get('country_code');
+  // }
+
+  // get shippingAddress(): AbstractControl {
+  //   return this.dateForm.get('date');
+  // }
+  get dateControl(): AbstractControl {
+    return this.dateForm.get('date');
   }
 
-  get billingCity(): AbstractControl {
-    return this.billingForm.get('city');
-  }
+  // get shippingPhone(): AbstractControl {
+  //   return this.shippingForm.get('phone');
+  // }
 
-  get billingState(): AbstractControl {
-    return this.billingForm.get('state');
-  }
-
-  get billingZip(): AbstractControl {
-    return this.billingForm.get('zip');
-  }
-
-  get billingCountryCode(): AbstractControl {
-    return this.billingForm.get('country_code');
-  }
-
-  get shippingAddress(): AbstractControl {
-    return this.shippingForm.get('address');
-  }
-
-  get shippingPhone(): AbstractControl {
-    return this.shippingForm.get('phone');
-  }
-
-  get shippingDeliveryTime(): AbstractControl {
-    return this.shippingForm.get('delivery_time');
-  }
+  // get shippingDeliveryTime(): AbstractControl {
+  //   return this.shippingForm.get('delivery_time');
+  // }
 
   get paymentNumber(): AbstractControl {
     return this.tipsForm.get('tips');
   }
 
-  get paymentExpiration(): AbstractControl {
-    return this.tipsForm.get('expiration');
-  }
+  // get paymentExpiration(): AbstractControl {
+  //   return this.tipsForm.get('expiration');
+  // }
 
-  get paymentCvv(): AbstractControl {
-    return this.tipsForm.get('cvv');
-  }
+  // get paymentCvv(): AbstractControl {
+  //   return this.tipsForm.get('cvv');
+  // }
 
-  constructor(private actionSheetCtrl: ActionSheetController,
+  constructor(
+    // private actionSheetCtrl: ActionSheetController,
     private navCtrl: NavController,
-    private sanitizer: DomSanitizer) {
+    private sanitizer: DomSanitizer
+  ) {
   }
 
   ngOnInit() {
@@ -140,26 +144,27 @@ export class MultiStepFormPage implements OnInit {
   }
 
   setupForm() {
-    this.billingForm = new FormGroup({
-      first_name: new FormControl('John', Validators.required),
-      last_name: new FormControl('Doe', Validators.required),
-      email: new FormControl('johndoe@some.com', Validators.required),
-      address: new FormControl('Main Street 123', Validators.required),
-      city: new FormControl('Boca Raton', Validators.required),
-      state: new FormControl('Florida', Validators.required),
-      zip: new FormControl('34799', Validators.required),
-      country_code: new FormControl('US', Validators.required),
+    // this.billingForm = new FormGroup({
+    this.waitersListForm = new FormGroup({
+      name: new FormControl('John', Validators.required),
+      points: new FormControl([0.5, 0.5, 0.5], Validators.required),
+      hours: new FormControl(4.15, Validators.required),
+      // address: new FormControl('Main Street 123', Validators.required),
+      // city: new FormControl('Boca Raton', Validators.required),
+      // state: new FormControl('Florida', Validators.required),
+      // zip: new FormControl('34799', Validators.required),
+      // country_code: new FormControl('US', Validators.required),
     });
 
-    this.shippingForm = new FormGroup({
-      address: new FormControl('Main Street 123', Validators.required),
-      phone: new FormControl('+1546372922', Validators.required),
-      delivery_time: new FormControl(null, Validators.required),
-      message: new FormControl(''),
+    this.dateForm = new FormGroup({
+      date: new FormControl('12/12/2021', Validators.required),
+      // phone: new FormControl('+1546372922', Validators.required),
+      // delivery_time: new FormControl(null, Validators.required),
+      // message: new FormControl(''),
     });
 
     this.tipsForm = new FormGroup({
-      tips: new FormControl('', Validators.required),
+      tips: new FormControl(100, Validators.required),
 
       // number: new FormControl('', Validators.required),
       // expiration: new FormControl('', Validators.required),
@@ -186,15 +191,15 @@ export class MultiStepFormPage implements OnInit {
   onNextButtonTouched() {
 
     if (this.currentSlide === 'Waites List') {
-      this.billingFormRef.onSubmit(undefined);
-      if (this.billingForm.valid) {
+      this.waitersFormRef.onSubmit(undefined);
+      if (this.waitersListForm.valid) {
         this.ionSlides.slideNext();
         this.ionContent.scrollToTop();
       }
     }
     else if (this.currentSlide === 'Date') {
-      this.shippingFormRef.onSubmit(undefined);
-      if (this.shippingForm.valid) {
+      this.dateFormRef.onSubmit(undefined);
+      if (this.dateForm.valid) {
         this.ionSlides.slideNext();
         this.ionContent.scrollToTop();
       }
@@ -202,7 +207,7 @@ export class MultiStepFormPage implements OnInit {
     }
     else if (this.currentSlide === 'Tips') {
 
-      this.paymentFormRef.onSubmit(undefined);
+      this.tipsFormRef.onSubmit(undefined);
       if (this.tipsForm.valid) {
         this.ionSlides.slideNext();
         this.ionContent.scrollToTop();
@@ -214,78 +219,90 @@ export class MultiStepFormPage implements OnInit {
 
     }
     else {
-      console.log('waitersList', this.billingForm.value);
-      console.log('date', this.shippingForm.value);
-      console.log('tipsMade', this.tipsForm.value);
+      // console.log('waitersList', this.waitersListForm.value);
+      // console.log('date', this.dateForm.value);
+      // console.log('tipsMade', this.tipsForm.value);
+      const waitersList = this.waitersListForm;
+      const date = this.dateForm;
+      const tips = this.tipsForm;
+      this.buildWaiterEntryObject(waitersList, date, tips);
       // this.navCtrl.navigateRoot('/thanks', {
       //   animated: true,
       //   animationDirection: 'forward',
       // });
     }
   }
-
-  convertBlobToBase64 = (blob: Blob) => new Promise((resolve, reject) => {
-    const reader = new FileReader;
-    reader.onerror = reject;
-    reader.onload = () => resolve(reader.result);
-    reader.readAsDataURL(blob);
-  });
-
-  async chooseImage(source: CameraSource) {
-
-    try {
-
-      const image = await Camera.getPhoto({
-        quality: 70,
-        width: 600,
-        height: 600,
-        preserveAspectRatio: true,
-        allowEditing: true,
-        correctOrientation: true,
-        source: source,
-        resultType: CameraResultType.Uri,
-      });
-
-      const safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(image.webPath);
-      this.imagePath = safeUrl;
-
-      const response = await fetch(image.webPath);
-      const blob = await response.blob();
-
-      const base64 = await this.convertBlobToBase64(blob) as string;
-
-      // Send encoded string to server...
-
-    } catch (error) {
-      console.warn(error);
-    }
-
-  }
-
-  async presentActionSheet() {
-
-    const actionSheet = await this.actionSheetCtrl.create({
-      header: 'Choose an option',
-      buttons: [{
-        text: 'Photo Library',
-        handler: () => {
-          this.chooseImage(CameraSource.Photos);
-        }
-      },
-      {
-        text: 'Camera',
-        handler: () => {
-          this.chooseImage(CameraSource.Camera);
-        }
-      },
-      {
-        text: 'Cancel',
-        role: 'cancel'
-      }]
+  buildWaiterEntryObject(waitersList, date, tips) {
+    console.log('waitersList', waitersList);
+    console.log('date', date);
+    console.log('tipsMade', tips);
+    this.navCtrl.navigateRoot('/thanks', {
+      animated: true,
+      animationDirection: 'forward',
     });
-
-    return await actionSheet.present();
   }
+  // convertBlobToBase64 = (blob: Blob) => new Promise((resolve, reject) => {
+  //   const reader = new FileReader;
+  //   reader.onerror = reject;
+  //   reader.onload = () => resolve(reader.result);
+  //   reader.readAsDataURL(blob);
+  // });
+
+  // async chooseImage(source: CameraSource) {
+
+  //   try {
+
+  //     const image = await Camera.getPhoto({
+  //       quality: 70,
+  //       width: 600,
+  //       height: 600,
+  //       preserveAspectRatio: true,
+  //       allowEditing: true,
+  //       correctOrientation: true,
+  //       source: source,
+  //       resultType: CameraResultType.Uri,
+  //     });
+
+  //     const safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(image.webPath);
+  //     this.imagePath = safeUrl;
+
+  //     const response = await fetch(image.webPath);
+  //     const blob = await response.blob();
+
+  //     const base64 = await this.convertBlobToBase64(blob) as string;
+
+  //     // Send encoded string to server...
+
+  //   } catch (error) {
+  //     console.warn(error);
+  //   }
+
+  // }
+
+  // async presentActionSheet() {
+
+  //   const actionSheet = await this.actionSheetCtrl.create({
+  //     header: 'Choose an option',
+  //     buttons: [{
+  //       text: 'Photo Library',
+  //       handler: () => {
+  //         this.chooseImage(CameraSource.Photos);
+  //       }
+  //     },
+  //     {
+  //       text: 'Camera',
+  //       handler: () => {
+  //         this.chooseImage(CameraSource.Camera);
+  //       }
+  //     },
+  //     {
+  //       text: 'Cancel',
+  //       role: 'cancel'
+  //     }]
+  //   });
+
+  //   return await actionSheet.present();
+  // }
 
   originalOrder = (): number => 0;
 
