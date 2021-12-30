@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
+/* eslint-disable object-shorthand */
+/* eslint-disable new-parens */
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActionSheetController, IonContent, IonSlides, NavController } from '@ionic/angular';
 import { AbstractControl, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
@@ -35,11 +39,11 @@ export class MultiStepFormPage implements OnInit {
     }],
     subtotal: 25.00,
     shippingFee: 5.00,
-    total: 30.00, 
+    total: 30.00,
   };
 
   public billingForm: FormGroup;
-  public paymentForm: FormGroup;
+  public tipsForm: FormGroup;
   public shippingForm: FormGroup;
 
   public imagePath: SafeResourceUrl;
@@ -53,6 +57,7 @@ export class MultiStepFormPage implements OnInit {
 
   public slides: string[];
   public currentSlide: string;
+  // eslint-disable-next-line @typescript-eslint/no-inferrable-types
   public isBeginning: boolean = true;
   public isEnd: boolean = false;
 
@@ -101,15 +106,15 @@ export class MultiStepFormPage implements OnInit {
   }
 
   get paymentNumber(): AbstractControl {
-    return this.paymentForm.get('number');
+    return this.tipsForm.get('tips');
   }
 
   get paymentExpiration(): AbstractControl {
-    return this.paymentForm.get('expiration');
+    return this.tipsForm.get('expiration');
   }
 
   get paymentCvv(): AbstractControl {
-    return this.paymentForm.get('cvv');
+    return this.tipsForm.get('cvv');
   }
 
   constructor(private actionSheetCtrl: ActionSheetController,
@@ -128,7 +133,8 @@ export class MultiStepFormPage implements OnInit {
   }
 
   buildSlides() {
-    const slides = ['Billing', 'Shipping', 'Summary', 'Payment'];
+    const slides = ['Waites List', 'Date', 'Tips', 'Summary'];
+    // const slides = ['Billing', 'Shipping', 'Summary', 'Payment'];
     this.currentSlide = slides[0];
     this.slides = slides;
   }
@@ -152,10 +158,12 @@ export class MultiStepFormPage implements OnInit {
       message: new FormControl(''),
     });
 
-    this.paymentForm = new FormGroup({
-      number: new FormControl('', Validators.required),
-      expiration: new FormControl('', Validators.required),
-      cvv: new FormControl('', Validators.required),
+    this.tipsForm = new FormGroup({
+      tips: new FormControl('', Validators.required),
+
+      // number: new FormControl('', Validators.required),
+      // expiration: new FormControl('', Validators.required),
+      // cvv: new FormControl('', Validators.required),
     });
   }
 
@@ -176,40 +184,43 @@ export class MultiStepFormPage implements OnInit {
   }
 
   onNextButtonTouched() {
-    
-    if (this.currentSlide === 'Billing') {
 
+    if (this.currentSlide === 'Waites List') {
       this.billingFormRef.onSubmit(undefined);
-
       if (this.billingForm.valid) {
         this.ionSlides.slideNext();
         this.ionContent.scrollToTop();
       }
-
-    } else if (this.currentSlide === 'Shipping') {
-      
+    }
+    else if (this.currentSlide === 'Date') {
       this.shippingFormRef.onSubmit(undefined);
-
       if (this.shippingForm.valid) {
         this.ionSlides.slideNext();
         this.ionContent.scrollToTop();
       }
 
-    } else if (this.currentSlide === 'Payment') {
+    }
+    else if (this.currentSlide === 'Tips') {
 
       this.paymentFormRef.onSubmit(undefined);
-
-      if (this.paymentForm.valid) {
-        this.navCtrl.navigateRoot('/thanks', {
-          animated: true,
-          animationDirection: 'forward',
-        });
+      if (this.tipsForm.valid) {
+        this.ionSlides.slideNext();
+        this.ionContent.scrollToTop();
+        // this.navCtrl.navigateRoot('/thanks', {
+        //   animated: true,
+        //   animationDirection: 'forward',
+        // });
       }
 
-    }  else {
-
-      this.ionSlides.slideNext();
-      this.ionContent.scrollToTop();
+    }
+    else {
+      console.log('waitersList', this.billingForm.value);
+      console.log('date', this.shippingForm.value);
+      console.log('tipsMade', this.tipsForm.value);
+      // this.navCtrl.navigateRoot('/thanks', {
+      //   animated: true,
+      //   animationDirection: 'forward',
+      // });
     }
   }
 
@@ -260,12 +271,14 @@ export class MultiStepFormPage implements OnInit {
         handler: () => {
           this.chooseImage(CameraSource.Photos);
         }
-      }, {
+      },
+      {
         text: 'Camera',
         handler: () => {
           this.chooseImage(CameraSource.Camera);
         }
-      }, {
+      },
+      {
         text: 'Cancel',
         role: 'cancel'
       }]
@@ -274,8 +287,6 @@ export class MultiStepFormPage implements OnInit {
     return await actionSheet.present();
   }
 
-  originalOrder = (): number => {
-    return 0;
-  }
+  originalOrder = (): number => 0;
 
 }

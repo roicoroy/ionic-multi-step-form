@@ -35,11 +35,11 @@
 
           <div class="full-width ion-text-start">
 
-            <form [formGroup]="billingForm" #billingFormRef="ngForm" novalidate *ngIf="slide === 'Billing'">
+            <form [formGroup]="billingForm" #billingFormRef="ngForm" novalidate *ngIf="slide === 'Waites List'">
 
               <ion-list-header class="ion-no-padding" style="min-height: auto;">
                 <ion-label class="ion-text-center" color="primary">
-                  Billing details
+                  Waiters List
                 </ion-label>
               </ion-list-header>
 
@@ -159,7 +159,7 @@
 
             </form>
 
-            <form [formGroup]="shippingForm" #shippingFormRef="ngForm" novalidate *ngIf="slide === 'Shipping'">
+            <form [formGroup]="shippingForm" #shippingFormRef="ngForm" novalidate *ngIf="slide === 'Date'">
 
               <ion-list-header class="ion-no-padding" style="min-height: auto;">
                 <ion-label class="ion-text-center" color="primary">
@@ -239,7 +239,83 @@
 
             </form>
 
-            <div [hidden]="slide !== 'Summary'">
+            <!-- <form [formGroup]="paymentForm" #paymentFormRef="ngForm" novalidate *ngIf="slide === 'Tips'"> -->
+            <form [formGroup]="tipsForm" #paymentFormRef="ngForm" novalidate *ngIf="slide === 'Tips'">
+
+
+              <ion-list-header class="ion-no-padding" style="min-height: auto;">
+                <ion-label class="ion-text-center" color="primary">
+                  Tips
+                  <ion-text color="dark">
+                    <p class="ion-text-center">
+                      Add total of tips made today
+                    </p>
+                  </ion-text>
+                </ion-label>
+
+              </ion-list-header>
+
+              <ion-row>
+                <ion-col>
+                  <ion-item lines="none">
+                    <ion-label position="stacked">Tips amount</ion-label>
+                    <ion-input type="text" formControlName="tips"></ion-input>
+                  </ion-item>
+                  <ion-text color="danger">
+                    <span class="text-tiny"
+                      [style.visibility]="paymentNumber?.errors?.required && paymentFormRef.submitted ? '' : 'hidden'">
+                      Field required
+                    </span>
+                  </ion-text>
+                </ion-col>
+              </ion-row>
+
+              <!-- <ion-row>
+                <ion-col>
+                  <ion-item lines="none">
+                    <ion-label position="stacked">Expiration</ion-label>
+                    <ion-input type="text" formControlName="expiration"></ion-input>
+                  </ion-item>
+                  <ion-text color="danger">
+                    <span class="text-tiny"
+                      [style.visibility]="paymentExpiration?.errors?.required && paymentFormRef.submitted ? '' : 'hidden'">
+                      Field required
+                    </span>
+                  </ion-text>
+                </ion-col>
+
+                <ion-col>
+                  <ion-item lines="none">
+                    <ion-label position="stacked">CVV</ion-label>
+                    <ion-input type="text" formControlName="cvv"></ion-input>
+                  </ion-item>
+                  <ion-text color="danger">
+                    <span class="text-tiny"
+                      [style.visibility]="paymentCvv?.errors?.required && paymentFormRef.submitted ? '' : 'hidden'">
+                      Field required
+                    </span>
+                  </ion-text>
+                </ion-col>
+              </ion-row> -->
+
+              <!-- <div class="ion-text-center">
+                <ion-button type="button" style="width: 200px;" class="ion-margin-vertical" strong size="large"
+                  shape="round" color="primary" (click)="onNextButtonTouched()">
+                  Pay {{ order?.total | currency}}
+                </ion-button>
+              </div> -->
+
+              <!-- <div class="ion-text-center">
+                <ion-button type="button" style="width: 200px;" class="ion-margin-vertical" strong size="large"
+                  shape="round" color="light" (click)="onBackButtonTouched()">
+                  Back
+                </ion-button>
+              </div> -->
+
+            </form>
+
+            <!-- <div [hidden]="slide !== 'Summary'"> -->
+            <div *ngIf="slide === 'Summary'">
               <ion-list-header class="ion-no-padding" style="min-height: auto;">
                 <ion-label class="ion-text-center" color="primary">
                   Order details
@@ -323,59 +399,6 @@
                   </div>
                 </ion-item>
               </ion-list>
-            </div>
-
-            <form [formGroup]="paymentForm" #paymentFormRef="ngForm" novalidate *ngIf="slide === 'Payment'">
-
-
-              <ion-list-header class="ion-no-padding" style="min-height: auto;">
-                <ion-label class="ion-text-center" color="primary">
-                  Pay order
-                </ion-label>
-              </ion-list-header>
-
-              <ion-row>
-                <ion-col>
-                  <ion-item lines="none">
-                    <ion-label position="stacked">Card number</ion-label>
-                    <ion-input type="text" formControlName="number"></ion-input>
-                  </ion-item>
-                  <ion-text color="danger">
-                    <span class="text-tiny"
-                      [style.visibility]="paymentNumber?.errors?.required && paymentFormRef.submitted ? '' : 'hidden'">
-                      Field required
-                    </span>
-                  </ion-text>
-                </ion-col>
-              </ion-row>
-
-              <ion-row>
-                <ion-col>
-                  <ion-item lines="none">
-                    <ion-label position="stacked">Expiration</ion-label>
-                    <ion-input type="text" formControlName="expiration"></ion-input>
-                  </ion-item>
-                  <ion-text color="danger">
-                    <span class="text-tiny"
-                      [style.visibility]="paymentExpiration?.errors?.required && paymentFormRef.submitted ? '' : 'hidden'">
-                      Field required
-                    </span>
-                  </ion-text>
-                </ion-col>
-
-                <ion-col>
-                  <ion-item lines="none">
-                    <ion-label position="stacked">CVV</ion-label>
-                    <ion-input type="text" formControlName="cvv"></ion-input>
-                  </ion-item>
-                  <ion-text color="danger">
-                    <span class="text-tiny"
-                      [style.visibility]="paymentCvv?.errors?.required && paymentFormRef.submitted ? '' : 'hidden'">
-                      Field required
-                    </span>
-                  </ion-text>
-                </ion-col>
-              </ion-row>
 
               <div class="ion-text-center">
                 <ion-button type="button" style="width: 200px;" class="ion-margin-vertical" strong size="large"
@@ -390,17 +413,12 @@
                   Back
                 </ion-button>
               </div>
-
-            </form>
+            </div>
 
           </div>
-
         </ion-slide>
-
       </ng-container>
-
     </ion-slides>
-
   </div>
 
 </ion-content>
