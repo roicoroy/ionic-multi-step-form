@@ -85,77 +85,6 @@
                 </ion-col>
               </ion-row>
 
-              <!-- <ion-row>
-                <ion-col>
-                  <ion-item lines="none">
-                    <ion-label position="stacked">Address</ion-label>
-                    <ion-input type="text" formControlName="address"></ion-input>
-                  </ion-item>
-                  <ion-text color="danger">
-                    <span class="text-tiny"
-                      [style.visibility]="billingAddress?.errors?.required && waitersFormRef.submitted ? '' : 'hidden'">
-                      Field required
-                    </span>
-                  </ion-text>
-                </ion-col>
-              </ion-row>
-
-              <ion-row>
-                <ion-col>
-                  <ion-item lines="none">
-                    <ion-label position="stacked">City</ion-label>
-                    <ion-input type="text" formControlName="city"></ion-input>
-                  </ion-item>
-                  <ion-text color="danger">
-                    <span class="text-tiny"
-                      [style.visibility]="billingCity?.errors?.required && waitersFormRef.submitted ? '' : 'hidden'">
-                      Field required
-                    </span>
-                  </ion-text>
-                </ion-col>
-
-                <ion-col>
-                  <ion-item lines="none">
-                    <ion-label position="stacked">State</ion-label>
-                    <ion-input type="text" formControlName="state"></ion-input>
-                  </ion-item>
-                  <ion-text color="danger">
-                    <span class="text-tiny"
-                      [style.visibility]="billingState?.errors?.required && waitersFormRef.submitted ? '' : 'hidden'">
-                      Field required
-                    </span>
-                  </ion-text>
-                </ion-col>
-              </ion-row>
-
-              <ion-row>
-                <ion-col>
-                  <ion-item lines="none">
-                    <ion-label position="stacked">Zipcode</ion-label>
-                    <ion-input type="text" formControlName="zip" inputmode="numeric"></ion-input>
-                  </ion-item>
-                  <ion-text color="danger">
-                    <span class="text-tiny"
-                      [style.visibility]="billingZip?.errors?.required && waitersFormRef.submitted ? '' : 'hidden'">
-                      Field required
-                    </span>
-                  </ion-text>
-                </ion-col>
-
-                <ion-col>
-                  <ion-item lines="none">
-                    <ion-label position="stacked">Country code</ion-label>
-                    <ion-input type="text" formControlName="country_code" placeholder="two-letter code"></ion-input>
-                  </ion-item>
-                  <ion-text color="danger">
-                    <span class="text-tiny"
-                      [style.visibility]="billingCountryCode?.errors?.required && waitersFormRef.submitted ? '' : 'hidden'">
-                      Field required
-                    </span>
-                  </ion-text>
-                </ion-col>
-              </ion-row> -->
-
             </form>
 
             <form [formGroup]="dateForm" #dateFormRef="ngForm" novalidate *ngIf="slide === 'Date'">
@@ -238,7 +167,6 @@
 
             </form>
 
-            <!-- <form [formGroup]="paymentForm" #paymentFormRef="ngForm" novalidate *ngIf="slide === 'Tips'"> -->
             <form [formGroup]="tipsForm" #tipsFormRef="ngForm" novalidate *ngIf="slide === 'Tips'">
 
 
@@ -313,7 +241,6 @@
 
             </form>
 
-            <!-- <div [hidden]="slide !== 'Summary'"> -->
             <div *ngIf="slide === 'Summary'">
               <ion-list-header class="ion-no-padding" style="min-height: auto;">
                 <ion-label class="ion-text-center" color="primary">
@@ -330,12 +257,6 @@
                     {{ control.value.value }}
                   </p>
                 </div>
-                <!-- <p class="text-medium margin-v-sm" *ngIf="imagePath">
-                  <span class="bold">
-                    Attachment:
-                  </span>
-                  <img class="img-thumb" [src]="imagePath">
-                </p> -->
               </div>
               
               <div *ngIf="tipsForm.valid">
@@ -347,12 +268,6 @@
                     {{ control.value.value | json }}
                   </p>
                 </div>
-                <!-- <p class="text-medium margin-v-sm" *ngIf="imagePath">
-                  <span class="bold">
-                    Attachment:
-                  </span>
-                  <img class="img-thumb" [src]="imagePath">
-                </p> -->
               </div>
 
               <div *ngIf="waitersListForm.valid">
@@ -361,35 +276,18 @@
                   Waiters List
                 </p>
                 <div class="divider"></div>
-                <!-- <span class="text-small bold ion-text-uppercase">
-                  Waiter
-                </span> -->
                 <div *ngFor='let item of [1,2,3]'>
                   <p class="text-medium margin-v-sm"
                     *ngFor="let control of waitersListForm.controls | keyvalue: originalOrder">
 
                     <span class="bold">
                       {{ control.key.replace('_', ' ') | titlecase }}:
-                      <!--  -->
                     </span>
                     {{ control. value.value || '--' }}
                   </p>
                   <p>tipsShare: {{ '£25.36' }}</p>
                   <div class="divider"></div>
-                  <!-- 
-                  <p class="text-small bold ion-text-uppercase">
-                    Points
-                  </p>
-                  <ion-list>
-                    <ion-item *ngFor="let item of points?.points">
-                      <ion-label>
-                        <h2 class="text-medium bold">{{ item.name }}</h2>
-                      </ion-label>
-                      <div>
-                        <span class="text-medium">{{ item.amount | currency}}</span>
-                      </div>
-                    </ion-item>
-                  </ion-list> -->
+
                 </div>
               </div>
 
